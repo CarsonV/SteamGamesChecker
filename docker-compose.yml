@@ -12,7 +12,7 @@ services:
 
   db:
     image: postgres:14.2-alpine
-    container_name: pgbackend
+    container_name: pgSteamDB
     restart: always
     environment:
       POSTGRES_PASSWORD: $POSTPASS

@@ -7,7 +7,7 @@ DB_PASSWORD = os.getenv('POSTPASS')
 import psycopg
 
 def initDB():
-    with psycopg.connect("dbname=postgres host=localhost user=postgres", password=DB_PASSWORD)as conn:
+    with psycopg.connect("dbname=postgres host=pgSteamDB user=postgres", password=DB_PASSWORD)as conn:
     # Open a cursor to perform database operations
         with conn.cursor() as cur:
 
@@ -18,14 +18,14 @@ def initDB():
             conn.commit()
 
 def tieIDs(guildID, steamID, authorID):
-    with psycopg.connect("dbname=postgres host=localhost user=postgres", password=DB_PASSWORD)as conn:
+    with psycopg.connect("dbname=postgres host=pgSteamDB user=postgres", password=DB_PASSWORD)as conn:
         # Open a cursor to perform database operations
         with conn.cursor() as cur:
             cur.execute("INSERT INTO users (guildid, steamid, discordid) VALUES (%s, %s, %s) ON CONFLICT DO NOTHING", (guildID, steamID, authorID))
             print("ID's Tied")
 
 def insertGames(steamID, guildID, appID, appName):
-    with psycopg.connect("dbname=postgres host=localhost user=postgres", password=DB_PASSWORD)as conn:
+    with psycopg.connect("dbname=postgres host=pgSteamDB user=postgres", password=DB_PASSWORD)as conn:
         # Open a cursor to perform database operations
         with conn.cursor() as cur:
 
@@ -40,7 +40,7 @@ def insertGames(steamID, guildID, appID, appName):
         
 #keep this as a way to check all server owned games? tie to guildID
 def getGames(guildID):
-    with psycopg.connect("dbname=postgres host=localhost user=postgres", password=DB_PASSWORD)as conn:
+    with psycopg.connect("dbname=postgres host=pgSteamDB user=postgres", password=DB_PASSWORD)as conn:
         with conn.cursor() as cur:
             cur.execute("SELECT DISTINCT appname FROM games WHERE guildid = (%s)", (guildID,))
             res = cur.fetchall()
@@ -52,7 +52,7 @@ def getGames(guildID):
 
 #get some form of formatting on this
 def getSharedGames(guildID, authorID, mentionedID):
-    with psycopg.connect("dbname=postgres host=localhost user=postgres", password=DB_PASSWORD)as conn:
+    with psycopg.connect("dbname=postgres host=pgSteamDB user=postgres", password=DB_PASSWORD)as conn:
         with conn.cursor() as cur:
 
             row = cur.execute("SELECT steamid FROM users WHERE guildid = (%s) AND discordid = (%s)", (guildID, authorID)).fetchone()

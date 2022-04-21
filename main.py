@@ -13,6 +13,7 @@ DISCORDTOKEN = os.getenv('DISCORD_TOKEN')
 api = WebAPI(key= STEAMWEBKEY)
 
 dbHandler.initDB()
+print("DB INIT")
 
 intents = discord.Intents.default()
 intents.members = False
