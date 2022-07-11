@@ -5,10 +5,10 @@ cachetools==5.0.0
 certifi==2021.10.8
 chardet==4.0.0
 charset-normalizer==2.0.12
-discord.py==1.7.3
 idna==3.3
 multidict==6.0.2
 psycopg==3.0.11
+py-cord==2.0.0b7
 pycryptodomex==3.14.1
 python-dotenv==0.20.0
 requests==2.27.1
